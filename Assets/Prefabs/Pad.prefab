@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5294064265344822996}
   - component: {fileID: 5294064265344822997}
   - component: {fileID: 5294064265344822999}
+  - component: {fileID: -8924304695529282501}
   m_Layer: 0
   m_Name: Pad
   m_TagString: Untagged
@@ -109,3 +110,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.142857, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-8924304695529282501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5294064265344823002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18edb416a86b646c2aeac28e809db296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

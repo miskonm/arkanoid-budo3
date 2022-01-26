@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -31,6 +32,14 @@ public class Ball : MonoBehaviour
         {
             StartBall();
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Direction);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, Rb.velocity);
     }
 
     #endregion

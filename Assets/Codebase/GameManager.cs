@@ -11,6 +11,7 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
 
     [Header("Autoplay")]
     [SerializeField] private bool _needAutoplay;
+    [SerializeField] private float _autoPlayTimeScale = 5f;
 
     private int _currentLives;
     private bool _isGameOver;
@@ -74,6 +75,11 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
         Block.OnDestroyed -= AddScore;
     }
 
+    private void Update()
+    {
+        UpdateTimeScale();
+    }
+
     #endregion
 
 
@@ -128,6 +134,16 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
 
 
     #region Private methods
+
+    private void UpdateTimeScale()
+    {
+        if (PauseManager.Instance.IsPaused)
+        {
+            return;
+        }
+        
+        Time.timeScale = _needAutoplay ? _autoPlayTimeScale : 1;
+    }
 
     private void GameOver()
     {

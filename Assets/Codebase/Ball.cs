@@ -55,6 +55,15 @@ public class Ball : MonoBehaviour
     #endregion
 
 
+    #region Public methods
+
+    public void Restart()
+    {
+        _isStarted = false;
+    }
+
+    #endregion
+
     #region Private methods
 
     private void MoveBallWithPad()

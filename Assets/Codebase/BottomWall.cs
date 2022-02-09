@@ -12,5 +12,9 @@ public class BottomWall : MonoBehaviour
             // GameManager.Instance.RemoveLive();
             GameManager.Instance.CurrentLives--;
         }
+        else
+        {
+            Destroy(col.gameObject);
+        }
     }
 }

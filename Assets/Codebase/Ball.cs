@@ -18,6 +18,7 @@ public class Ball : MonoBehaviour
     public AudioSource AudioSource;
 
     private bool _isStarted;
+    private float _currentSpeed;
 
     #endregion
 
@@ -69,6 +70,14 @@ public class Ball : MonoBehaviour
     {
         _isStarted = false;
     }
+    
+    public void ChangeSpeed(float speedMultiplier)
+    {
+        _currentSpeed *= speedMultiplier;
+        
+        Vector2 currentDirection = Rb.velocity.normalized;
+        Rb.velocity = currentDirection * _currentSpeed;
+    }
 
     #endregion
 
@@ -83,9 +92,13 @@ public class Ball : MonoBehaviour
 
     private void StartBall()
     {
-        Rb.velocity = Direction.normalized * Speed;
+        _currentSpeed = Speed;
+        Rb.velocity = Direction.normalized * _currentSpeed;
         _isStarted = true;
     }
 
     #endregion
+
+
+    
 }

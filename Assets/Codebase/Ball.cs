@@ -24,9 +24,12 @@ public class Ball : MonoBehaviour
 
     #region Unity lifecycle
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void Start()
     {
-        AudioSource.Play();
+        if (GameManager.Instance.NeedAutoplay)
+        {
+            StartBall();
+        }
     }
 
     private void Update()
@@ -42,6 +45,11 @@ public class Ball : MonoBehaviour
         {
             StartBall();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        AudioSource.Play();
     }
 
     private void OnDrawGizmosSelected()

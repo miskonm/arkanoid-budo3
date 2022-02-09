@@ -5,8 +5,12 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
 {
     #region Variables
 
+    [Header("Lives Settings")]
     [SerializeField] private int _maxLives = 5;
     [SerializeField] private int _startLives = 3;
+
+    [Header("Autoplay")]
+    [SerializeField] private bool _needAutoplay;
 
     private int _currentLives;
     private bool _isGameOver;
@@ -43,6 +47,8 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
     }
 
     public int MaxLives => _maxLives;
+
+    public bool NeedAutoplay => _needAutoplay;
 
     #endregion
 

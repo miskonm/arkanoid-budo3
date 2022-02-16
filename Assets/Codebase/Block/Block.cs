@@ -9,13 +9,12 @@ public class Block : MonoBehaviour
     [Header("Base Settings")]
     public AudioClip AudioClip;
     public int Score = 5;
-    
+
     [Header("Pick Up")]
     [SerializeField] private GameObject _pickUpPrefab;
-    
+
     [Range(0f, 100f)]
     [SerializeField] private float _pickUpChance;
-    
 
     #endregion
 
@@ -39,20 +38,30 @@ public class Block : MonoBehaviour
     {
         if (!col.gameObject.CompareTag(Tags.Ball))
             return;
-        
-        AudioManager.Instance.PlayOnShot(AudioClip);
 
-        CreatePickUpIfNeeded();
-        
-        Destroy(gameObject);
-
-        OnDestroyed?.Invoke(this);
+        Kill();
     }
 
     #endregion
 
 
+    public void Kill()
+    {
+        AudioManager.Instance.PlayOnShot(AudioClip);
+        CreatePickUpIfNeeded();
+
+        ApplyInternalActions();
+        Destroy(gameObject);
+
+        OnDestroyed?.Invoke(this);
+    }
+    
+
     #region Private methods
+
+    protected virtual void ApplyInternalActions()
+    {
+    }
 
     private void CreatePickUpIfNeeded()
     {

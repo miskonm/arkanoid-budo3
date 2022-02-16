@@ -11,7 +11,7 @@ public class LevelManager : SingletoneMonoBehaviour<LevelManager>
 
     #region Events
 
-    public event Action OnGameOver;
+    public event Action OnLevelCleared;
 
     #endregion
 
@@ -46,7 +46,7 @@ public class LevelManager : SingletoneMonoBehaviour<LevelManager>
 
         if (_blocksCount <= 0)
         {
-            OnGameOver?.Invoke();
+            OnLevelCleared?.Invoke();
         }
     }
 

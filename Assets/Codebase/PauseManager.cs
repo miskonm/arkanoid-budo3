@@ -7,7 +7,8 @@ public class PauseManager : SingletoneMonoBehaviour<PauseManager>
     public bool IsPaused { get; private set; } = false;
 
     #endregion
-    
+
+
     #region Unity lifecycle
 
     private void Update()
@@ -16,6 +17,23 @@ public class PauseManager : SingletoneMonoBehaviour<PauseManager>
         {
             TogglePause();
         }
+    }
+
+    #endregion
+
+
+    #region Public methods
+
+    public void Pause()
+    {
+        IsPaused = true;
+        ApplyTimeScale();
+    }
+
+    public void UnPause()
+    {
+        IsPaused = false;
+        ApplyTimeScale();
     }
 
     #endregion
@@ -31,6 +49,11 @@ public class PauseManager : SingletoneMonoBehaviour<PauseManager>
     private void TogglePause()
     {
         IsPaused = !IsPaused;
+        ApplyTimeScale();
+    }
+
+    private void ApplyTimeScale()
+    {
         Time.timeScale = IsPaused ? 0 : 1;
     }
 

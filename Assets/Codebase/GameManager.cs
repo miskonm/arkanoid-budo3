@@ -14,7 +14,6 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
     [SerializeField] private float _autoPlayTimeScale = 5f;
 
     private int _currentLives;
-    private bool _isGameOver;
 
     #endregion
 
@@ -32,7 +31,7 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
 
     public int CurrentLives
     {
-        get => _currentLives; 
+        get => _currentLives;
         set
         {
             _currentLives = value;
@@ -42,7 +41,7 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
 
             if (_currentLives > _maxLives)
                 _currentLives = _maxLives;
-            
+
             OnLivesChanged?.Invoke();
         }
     }
@@ -63,21 +62,21 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
         CurrentLives = _startLives;
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        LevelManager.Instance.OnGameOver += GameOver;
+        LevelManager.Instance.OnLevelCleared += LevelCleared;
         Block.OnDestroyed += AddScore;
-    }
-
-    private void OnDisable()
-    {
-        LevelManager.Instance.OnGameOver -= GameOver;
-        Block.OnDestroyed -= AddScore;
     }
 
     private void Update()
     {
         UpdateTimeScale();
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.Instance.OnLevelCleared -= LevelCleared;
+        Block.OnDestroyed -= AddScore;
     }
 
     #endregion
@@ -88,7 +87,6 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
     public void Reload()
     {
         Score = 0;
-        _isGameOver = false;
         CurrentLives = _startLives;
     }
 
@@ -141,21 +139,13 @@ public class GameManager : SingletoneMonoBehaviour<GameManager>
         {
             return;
         }
-        
+
         Time.timeScale = _needAutoplay ? _autoPlayTimeScale : 1;
     }
 
-    private void GameOver()
+    private void LevelCleared()
     {
-        if (_isGameOver)
-        {
-            return;
-        }
-
-        _isGameOver = true;
-
-        // Show game over view
-        Debug.Log($"Game Over!");
+        PauseManager.Instance.Pause();
     }
 
     #endregion

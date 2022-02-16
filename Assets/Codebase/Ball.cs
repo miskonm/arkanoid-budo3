@@ -56,9 +56,11 @@ public class Ball : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Direction);
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawRay(transform.position, Rb.velocity);
+        
+        if (!_isStarted)
+        {
+            Gizmos.DrawRay(transform.position, Direction * Speed);
+        }
     }
 
     #endregion
